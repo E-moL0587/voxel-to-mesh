@@ -5,4 +5,5 @@ public class HomeController : Controller
 {
     public IActionResult Index() { return View(); }
     public IActionResult Voxel() { return View(); }
+    public IActionResult Mesh() { return View(); }
 }
