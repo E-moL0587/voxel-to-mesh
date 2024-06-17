@@ -1,8 +1,15 @@
-﻿@{
-  ViewData["Title"] = "Voxel";
-}
+﻿@model voxel_to_mesh.Models.CoordinateViewModel
+@{ ViewData["Title"] = "Voxel"; }
 
 <div>
   <h3>@ViewData["Title"]</h3>
   <a asp-action="Index">Index</a>
+</div>
+
+<div>
+  <h4>Coordinates:</h4>
+  <ul>
+    @foreach (var coordinate in Model.Coordinates)
+    { <li>X: @coordinate.X, Y: @coordinate.Y, Z: @coordinate.Z</li> }
+  </ul>
 </div>

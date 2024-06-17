@@ -1,9 +1,30 @@
 using Microsoft.AspNetCore.Mvc;
-namespace voxel_to_mesh.Controllers;
+using voxel_to_mesh.Models;
 
-public class HomeController : Controller
+namespace voxel_to_mesh.Controllers
 {
-    public IActionResult Index() { return View(); }
-    public IActionResult Voxel() { return View(); }
-    public IActionResult Mesh() { return View(); }
+    public class HomeController : Controller
+    {
+        private readonly CoordinateViewModel _coordinateViewModel;
+
+        public HomeController()
+        {
+            _coordinateViewModel = new CoordinateViewModel();
+        }
+
+        public IActionResult Index()
+        {
+            return View(_coordinateViewModel);
+        }
+
+        public IActionResult Voxel()
+        {
+            return View(_coordinateViewModel);
+        }
+
+        public IActionResult Mesh()
+        {
+            return View();
+        }
+    }
 }
