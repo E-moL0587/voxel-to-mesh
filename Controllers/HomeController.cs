@@ -7,7 +7,7 @@ namespace voxel_to_mesh.Controllers {
 
     public HomeController() { _coordinateModel = new CoordinateModel(); }
     public IActionResult Index() { return View(_coordinateModel); }
-    public IActionResult Voxel() { return View(_coordinateModel); }
+    public IActionResult Voxel() { return View(); }
     public IActionResult Mesh() { return View(); }
   }
 }

@@ -1,13 +1,6 @@
-﻿@model voxel_to_mesh.Models.CoordinateModel
-@{ ViewData["Title"] = "Voxel"; }
+﻿@{ ViewData["Title"] = "Voxel"; }
 
 <div>
   <h3>@ViewData["Title"]</h3>
   <a asp-action="Index">Index</a>
-</div>
-
-<div>
-  <h5>座標</h5>
-  @foreach (var coordinate in Model.Coordinates)
-  { <div>(@coordinate.X, @coordinate.Y, @coordinate.Z)</div> }
 </div>
