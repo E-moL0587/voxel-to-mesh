@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\voxel-to-mesh.props" />
+</Project>
