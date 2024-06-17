@@ -5,21 +5,21 @@ namespace voxel_to_mesh.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly CoordinateViewModel _coordinateViewModel;
+        private readonly CoordinateModel _coordinateModel;
 
         public HomeController()
         {
-            _coordinateViewModel = new CoordinateViewModel();
+            _coordinateModel = new CoordinateModel();
         }
 
         public IActionResult Index()
         {
-            return View(_coordinateViewModel);
+            return View(_coordinateModel);
         }
 
         public IActionResult Voxel()
         {
-            return View(_coordinateViewModel);
+            return View(_coordinateModel);
         }
 
         public IActionResult Mesh()

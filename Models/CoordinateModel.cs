@@ -1,10 +1,10 @@
 namespace voxel_to_mesh.Models
 {
-    public class CoordinateViewModel
+    public class CoordinateModel
     {
         public List<(double X, double Y, double Z)> Coordinates { get; set; }
 
-        public CoordinateViewModel()
+        public CoordinateModel()
         {
             Coordinates = new List<(double X, double Y, double Z)>
             {

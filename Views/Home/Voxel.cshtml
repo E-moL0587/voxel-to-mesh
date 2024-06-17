@@ -1,4 +1,4 @@
-﻿@model voxel_to_mesh.Models.CoordinateViewModel
+﻿@model voxel_to_mesh.Models.CoordinateModel
 @{ ViewData["Title"] = "Voxel"; }
 
 <div>
@@ -7,9 +7,7 @@
 </div>
 
 <div>
-  <h4>Coordinates:</h4>
-  <ul>
-    @foreach (var coordinate in Model.Coordinates)
-    { <li>X: @coordinate.X, Y: @coordinate.Y, Z: @coordinate.Z</li> }
-  </ul>
+  <h5>座標</h5>
+  @foreach (var coordinate in Model.Coordinates)
+  { <div>(@coordinate.X, @coordinate.Y, @coordinate.Z)</div> }
 </div>
