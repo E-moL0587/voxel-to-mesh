@@ -1,4 +1,5 @@
 {
     "appService.defaultWebAppToDeploy": "/subscriptions/6f0d6d7a-e4ac-4824-b78b-344eaa2c2ca4/resourceGroups/voxel-to-mesh_group/providers/Microsoft.Web/sites/voxel-to-mesh",
-    "appService.deploySubpath": "bin\\Publish"
+    "appService.deploySubpath": "bin\\Publish",
+    "editor.codeLens": false
 }
