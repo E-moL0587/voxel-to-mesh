@@ -1,62 +1,48 @@
 @{ ViewData["Title"] = "Pixels"; }
 
-<div>
+<section>
   <h3>@ViewData["Title"]</h3>
   <a asp-action="Index">Index</a>
-</div>
 
-<div>
-  <input type="file" id="input1" accept="image/*">
-  <input type="file" id="input2" accept="image/*">
-  <button id="processButton">Images to Pixels</button>
-</div>
+  <input type="file" accept="image/*" id="inputImage" onchange="processImage(event)">
+  <canvas id="outputPixel"></canvas>
+</section>
 
-<div id="result1"></div>
-<div id="result2"></div>
-
+<script async src="https://docs.opencv.org/4.x/opencv.js"></script>
 <script>
-  document.getElementById('processButton').addEventListener('click', () => {
-    const input1 = document.getElementById('input1');
-    const input2 = document.getElementById('input2');
-    if (input1.files && input1.files[0]) processImage(input1.files[0], 'result1');
-    if (input2.files && input2.files[0]) processImage(input2.files[0], 'result2');
-  });
+  const imgSize = 20;
+  const pixelSize = 10;
 
-  function processImage(file, resultId) {
-    const reader = new FileReader();
-    reader.onload = function(event) {
-      const img = new Image();
-      img.onload = function() {
-        const canvas = document.createElement('canvas');
-        const ctx = canvas.getContext('2d');
+  function processImage(event) {
+    const file = event.target.files[0];
+    if (!file) return;
 
-        canvas.width = 20;
-        canvas.height = 20;
-        ctx.drawImage(img, 0, 0, 20, 20);
+    const img = new Image();
+    img.onload = () => {
+      const canvas = document.getElementById('outputPixel');
+      const ctx = canvas.getContext('2d');
+      canvas.width = imgSize * pixelSize;
+      canvas.height = imgSize * pixelSize;
 
-        const imageData = ctx.getImageData(0, 0, 20, 20);
-        let binaryData = '';
-        for (let y = 0; y < 20; y++) {
-          for (let x = 0; x < 20; x++) {
-            const index = (y * 20 + x) * 4;
-            const red = imageData.data[index];
-            const green = imageData.data[index + 1];
-            const blue = imageData.data[index + 2];
-            const gray = 0.3 * red + 0.59 * green + 0.11 * blue;
-            binaryData += gray >= 128 ? '1' : '0';
-          }
-          binaryData += '\n';
+      ctx.drawImage(img, 0, 0, imgSize, imgSize);
+
+      const src = cv.imread(canvas);
+      cv.cvtColor(src, src, cv.COLOR_RGBA2GRAY);
+      cv.threshold(src, src, 128, 255, cv.THRESH_BINARY);
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let y = 0; y < imgSize; y++) {
+        for (let x = 0; x < imgSize; x++) {
+          const rect = new cv.Rect(x, y, 1, 1);
+          const color = cv.mean(src.roi(rect))[0] > 128 ? 'white' : 'black';
+          ctx.fillStyle = color;
+          ctx.fillRect(x * pixelSize, y * pixelSize, pixelSize, pixelSize);
         }
-
-        displayBinaryData(binaryData, resultId);
       }
-      img.src = event.target.result;
-    }
+      src.delete();
+    };
+    const reader = new FileReader();
+    reader.onload = (e) => img.src = e.target.result;
     reader.readAsDataURL(file);
-  }
-
-  function displayBinaryData(binaryData, resultId) {
-    const resultDiv = document.getElementById(resultId);
-    resultDiv.innerText = binaryData;
   }
 </script>
