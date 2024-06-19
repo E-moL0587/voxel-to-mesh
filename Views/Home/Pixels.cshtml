@@ -1,51 +1,9 @@
-@{ ViewData["Title"] = "Pixels"; }
+@{
+    ViewData["Title"] = "Pixels";
+}
 
 <section>
   <h3>@ViewData["Title"]</h3>
   <a asp-action="Index">Index</a>
-
-  <div>
-    <input type="file" accept="image/*" id="input-front">
-    <input type="file" accept="image/*" id="input-side">
-    <input type="file" accept="image/*" id="input-top">
-  </div>
-
-  <div>
-    <canvas id="output-front" width="100" height="100" style="border: 2px solid #ccc;"></canvas>
-    <canvas id="output-side" width="100" height="100" style="border: 2px solid #ccc;"></canvas>
-    <canvas id="output-top" width="100" height="100" style="border: 2px solid #ccc;"></canvas>
-  </div>
+  <img src="@ViewData["BinaryImage"]" alt="Binary Image" />
 </section>
-
-<script>
-  const images = {
-    front: '@Url.Content("~/images/front.png")',
-    side: '@Url.Content("~/images/side.png")',
-    top: '@Url.Content("~/images/top.png")'
-  };
-
-  window.onload = () => {
-    ['front', 'side', 'top'].forEach(id => {
-      const img = new Image();
-      img.onload = () => document.getElementById(`output-${id}`).getContext('2d').drawImage(img, 0, 0, 100, 100);
-      img.src = images[id];
-
-      document.getElementById(`input-${id}`).onchange = e => {
-        const file = e.target.files[0];
-        if (file) {
-          const reader = new FileReader();
-          reader.onload = ev => {
-            const newImg = new Image();
-            newImg.onload = () => {
-              const ctx = document.getElementById(`output-${id}`).getContext('2d');
-              ctx.clearRect(0, 0, 100, 100);
-              ctx.drawImage(newImg, 0, 0, 100, 100);
-            };
-            newImg.src = ev.target.result;
-          };
-          reader.readAsDataURL(file);
-        }
-      };
-    });
-  };
-</script>
