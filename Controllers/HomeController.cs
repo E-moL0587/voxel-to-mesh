@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing;
+using System.Text;
 
 namespace voxel_to_mesh.Controllers {
   public class HomeController : Controller {
@@ -13,15 +14,20 @@ namespace voxel_to_mesh.Controllers {
       var imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/front.png");
 
       using var image = Image.Load<Rgba32>(imagePath);
-      image.Mutate(x => x.Resize(30, 30));
-      image.Mutate(x => x.Grayscale());
-      image.Mutate(x => x.BinaryThreshold(0.5f));
+      image.Mutate(x => x.Resize(30, 30).Grayscale().BinaryThreshold(0.5f));
 
       using var ms = new MemoryStream();
       image.SaveAsPng(ms);
-      var imageBytes = ms.ToArray();
-      var base64Image = Convert.ToBase64String(imageBytes);
+      var base64Image = Convert.ToBase64String(ms.ToArray());
       ViewData["BinaryImage"] = $"data:image/png;base64,{base64Image}";
+
+      var binaryData = new StringBuilder(image.Height * image.Width);
+      for (int y = 0; y < image.Height; y++) {
+        for (int x = 0; x < image.Width; x++) {
+          binaryData.Append(image[x, y].R == 255 ? '1' : '0');
+        }
+      }
+      ViewData["BinaryData"] = binaryData.ToString();
 
       return View();
     }
