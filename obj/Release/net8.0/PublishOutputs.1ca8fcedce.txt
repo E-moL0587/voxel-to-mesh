@@ -5,3 +5,4 @@ C:\Users\竹内 海斗\workspace\dotnet-space\voxel-to-mesh\bin\Publish\voxel-to
 C:\Users\竹内 海斗\workspace\dotnet-space\voxel-to-mesh\bin\Publish\voxel-to-mesh.deps.json
 C:\Users\竹内 海斗\workspace\dotnet-space\voxel-to-mesh\bin\Publish\voxel-to-mesh.runtimeconfig.json
 C:\Users\竹内 海斗\workspace\dotnet-space\voxel-to-mesh\bin\Publish\voxel-to-mesh.pdb
+C:\Users\竹内 海斗\workspace\dotnet-space\voxel-to-mesh\bin\Publish\SixLabors.ImageSharp.dll

@@ -29,3 +29,6 @@ C:\Users\竹内 海斗\workspace\dotnet-space\voxel-to-mesh\obj\Release\net8.0\r
 C:\Users\竹内 海斗\workspace\dotnet-space\voxel-to-mesh\obj\Release\net8.0\voxel-to-mesh.pdb
 C:\Users\竹内 海斗\workspace\dotnet-space\voxel-to-mesh\obj\Release\net8.0\voxel-to-mesh.genruntimeconfig.cache
 C:\Users\竹内 海斗\workspace\dotnet-space\voxel-to-mesh\obj\Release\net8.0\ref\voxel-to-mesh.dll
+C:\Users\竹内 海斗\workspace\dotnet-space\voxel-to-mesh\bin\Release\net8.0\SixLabors.ImageSharp.dll
+C:\Users\竹内 海斗\workspace\dotnet-space\voxel-to-mesh\obj\Release\net8.0\voxel-to-mesh.csproj.AssemblyReference.cache
+C:\Users\竹内 海斗\workspace\dotnet-space\voxel-to-mesh\obj\Release\net8.0\voxel-to.24F8DC2E.Up2Date

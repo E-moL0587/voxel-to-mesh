@@ -1,10 +1,14 @@
-@{
-    ViewData["Title"] = "Pixels";
-}
+@{ ViewData["Title"] = "Pixels"; }
 
 <section>
   <h3>@ViewData["Title"]</h3>
   <a asp-action="Index">Index</a>
-  <img src="@ViewData["BinaryImage"]" alt="Binary Image" />
-  <pre>@ViewData["BinaryData"]</pre>
+
+  <h4>Front Image</h4>
+  <img src="@ViewData["FrontBinaryImage"]" alt="Binary Image - Front" />
+  <pre>@ViewData["FrontBinaryData"]</pre>
+
+  <h4>Side Image</h4>
+  <img src="@ViewData["SideBinaryImage"]" alt="Binary Image - Side" />
+  <pre>@ViewData["SideBinaryData"]</pre>
 </section>

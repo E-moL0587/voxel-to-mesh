@@ -13,6 +13,18 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\竹内 海斗\\workspace\\dotnet-space\\voxel-to-mesh\\wwwroot\\images\\front.png",
+      "PackagePath": "staticwebassets\\images\\front.png"
+    },
+    {
+      "Id": "C:\\Users\\竹内 海斗\\workspace\\dotnet-space\\voxel-to-mesh\\wwwroot\\images\\side.png",
+      "PackagePath": "staticwebassets\\images\\side.png"
+    },
+    {
+      "Id": "C:\\Users\\竹内 海斗\\workspace\\dotnet-space\\voxel-to-mesh\\wwwroot\\images\\top.png",
+      "PackagePath": "staticwebassets\\images\\top.png"
+    },
+    {
       "Id": "C:\\Users\\竹内 海斗\\workspace\\dotnet-space\\voxel-to-mesh\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },
