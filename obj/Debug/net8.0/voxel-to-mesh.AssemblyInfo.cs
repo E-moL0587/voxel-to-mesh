@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("voxel-to-mesh")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6aa519be6d7cb94429d398478ff68dcd6fada03e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f7d40ea56e5cdc213661468833fbed58ca783baf")]
 [assembly: System.Reflection.AssemblyProductAttribute("voxel-to-mesh")]
 [assembly: System.Reflection.AssemblyTitleAttribute("voxel-to-mesh")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
