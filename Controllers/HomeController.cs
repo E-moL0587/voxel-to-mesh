@@ -22,7 +22,7 @@ namespace voxel_to_mesh.Controllers {
       ViewData["SideBinaryImage"] = sideBase64Image;
       ViewData["SideBinaryData"] = sideBinaryData;
 
-      var (topBase64Image, topBinaryData) = ProcessImage(topImagePath, 90);
+      var (topBase64Image, topBinaryData) = ProcessImage(topImagePath);
       ViewData["TopBinaryImage"] = topBase64Image;
       ViewData["TopBinaryData"] = topBinaryData;
 
