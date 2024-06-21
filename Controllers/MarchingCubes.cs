@@ -5,7 +5,6 @@ namespace voxel_to_mesh {
     public List<float[]> GenerateMesh(List<int[]> voxelData, int width, int height, int depth) {
       var meshData = new List<float[]>();
 
-      // Scalar field to determine if a voxel is inside or outside the surface
       int[,,] scalarField = new int[width, height, depth];
       foreach (var voxel in voxelData) {
         scalarField[voxel[0], voxel[1], voxel[2]] = 1;
