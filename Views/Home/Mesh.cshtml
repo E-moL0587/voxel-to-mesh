@@ -32,9 +32,22 @@
   const geometry = new THREE.BufferGeometry();
 
   const vertices = [];
+  const data = [];
   for (let i = 0; i < meshData.length; i++) {
-    vertices.push(meshData[i][0], meshData[i][1], meshData[i][2]);
+    data.push(new THREE.Vector3(meshData[i][0], meshData[i][1], meshData[i][2]));
   }
+
+  const boundingBox = new THREE.Box3();
+  data.forEach(point => {
+    boundingBox.expandByPoint(point);
+  });
+
+  const center = new THREE.Vector3();
+  boundingBox.getCenter(center);
+
+  data.forEach(point => {
+    vertices.push(-(point.x - center.x), -(point.y - center.y), -(point.z - center.z));
+  });
 
   geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
   geometry.computeVertexNormals();
