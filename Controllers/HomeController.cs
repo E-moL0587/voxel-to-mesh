@@ -6,7 +6,7 @@ using System.Text;
 
 namespace voxel_to_mesh.Controllers {
   public class HomeController : Controller {
-    public IActionResult Index() { return View(); }
+    public IActionResult Index() => View();
 
     public IActionResult Pixels() {
       var frontImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/front.png");
@@ -19,9 +19,6 @@ namespace voxel_to_mesh.Controllers {
       var (sideBase64Image, sideBinaryData) = ProcessImage(sideImagePath);
       ViewData["SideBinaryImage"] = sideBase64Image;
       ViewData["SideBinaryData"] = sideBinaryData;
-
-      var voxelData = GenerateVoxelData(frontBinaryData, sideBinaryData, 30, 30);
-      ViewData["VoxelData"] = string.Join("\n", voxelData);
 
       return View();
     }
@@ -50,7 +47,6 @@ namespace voxel_to_mesh.Controllers {
       for (int y = 0; y < height; y++) {
         for (int x = 0; x < width; x++) {
           int z = x;
-
           int frontIndex = y * width + x;
           int sideIndex = y * width + z;
 
@@ -63,7 +59,19 @@ namespace voxel_to_mesh.Controllers {
       return voxelData;
     }
 
-    public IActionResult Voxel() { return View(); }
-    public IActionResult Mesh() { return View(); }
+    public IActionResult Voxel() {
+      var frontImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/front.png");
+      var sideImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/side.png");
+
+      var (_, frontBinaryData) = ProcessImage(frontImagePath);
+      var (_, sideBinaryData) = ProcessImage(sideImagePath);
+
+      var voxelData = GenerateVoxelData(frontBinaryData, sideBinaryData, 30, 30);
+      ViewData["VoxelData"] = string.Join("\n", voxelData);
+
+      return View();
+    }
+
+    public IActionResult Mesh() => View();
   }
 }
