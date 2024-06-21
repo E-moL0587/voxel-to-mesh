@@ -7,6 +7,9 @@ using System.Text.Json;
 
 namespace voxel_to_mesh.Controllers {
   public class HomeController : Controller {
+    private readonly MarchingCubes _marchingCubes;
+    public HomeController() { _marchingCubes = new MarchingCubes(); }
+
     public IActionResult Index() => View();
 
     public IActionResult Pixels() {
@@ -95,26 +98,11 @@ namespace voxel_to_mesh.Controllers {
       var (_, topBinaryData) = ProcessImage(topImagePath, 90);
 
       var voxelData = GenerateVoxelData(frontBinaryData, sideBinaryData, topBinaryData, 20, 20);
-
-      var marchingCubes = new MarchingCubes();
-      var meshData = marchingCubes.GenerateMesh(voxelData, 20, 20, 20);
+      var meshData = _marchingCubes.GenerateMesh(voxelData, 20, 20, 20);
 
       ViewData["MeshData"] = JsonSerializer.Serialize(meshData);
 
       return View();
-    }
-  }
-
-  public class MarchingCubes {
-    public List<float[]> GenerateMesh(List<int[]> voxelData, int width, int height, int depth) {
-      // Implement the Marching Cubes algorithm here
-      // Return the mesh data as a list of float arrays (vertices)
-      var meshData = new List<float[]>();
-      // Dummy implementation for demonstration purposes
-      foreach (var voxel in voxelData) {
-        meshData.Add(new float[] { voxel[0], voxel[1], voxel[2] });
-      }
-      return meshData;
     }
   }
 }
