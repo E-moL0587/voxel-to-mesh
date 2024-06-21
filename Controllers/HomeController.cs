@@ -6,10 +6,7 @@ using System.Text;
 
 namespace voxel_to_mesh.Controllers {
   public class HomeController : Controller {
-    private readonly Models.CoordinateModel _coordinateModel;
-    public HomeController() { _coordinateModel = new Models.CoordinateModel(); }
-
-    public IActionResult Index() { return View(_coordinateModel); }
+    public IActionResult Index() { return View(); }
 
     public IActionResult Pixels() {
       var frontImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/front.png");
