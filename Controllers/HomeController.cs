@@ -47,12 +47,13 @@ namespace voxel_to_mesh.Controllers {
 
       for (int y = 0; y < height; y++) {
         for (int x = 0; x < width; x++) {
-          int z = x;
-          int frontIndex = y * width + x;
-          int sideIndex = y * width + z;
+          for (int z = 0; z < width; z++) {
+            int frontIndex = y * width + x;
+            int sideIndex = y * width + z;
 
-          if (frontData[frontIndex] == '1' && sideData[sideIndex] == '1') {
-            voxelData.Add(new int[] { x, y, z });
+            if (frontData[frontIndex] == '0' && sideData[sideIndex] == '0') {
+              voxelData.Add(new int[] { x, y, z });
+            }
           }
         }
       }
