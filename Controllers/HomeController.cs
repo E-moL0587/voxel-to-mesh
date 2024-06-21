@@ -85,6 +85,36 @@ namespace voxel_to_mesh.Controllers {
       return View();
     }
 
-    public IActionResult Mesh() => View();
+    public IActionResult Mesh() {
+      var frontImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/front.png");
+      var sideImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/side.png");
+      var topImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/top.png");
+
+      var (_, frontBinaryData) = ProcessImage(frontImagePath);
+      var (_, sideBinaryData) = ProcessImage(sideImagePath);
+      var (_, topBinaryData) = ProcessImage(topImagePath, 90);
+
+      var voxelData = GenerateVoxelData(frontBinaryData, sideBinaryData, topBinaryData, 20, 20);
+
+      var marchingCubes = new MarchingCubes();
+      var meshData = marchingCubes.GenerateMesh(voxelData, 20, 20, 20);
+
+      ViewData["MeshData"] = JsonSerializer.Serialize(meshData);
+
+      return View();
+    }
+  }
+
+  public class MarchingCubes {
+    public List<float[]> GenerateMesh(List<int[]> voxelData, int width, int height, int depth) {
+      // Implement the Marching Cubes algorithm here
+      // Return the mesh data as a list of float arrays (vertices)
+      var meshData = new List<float[]>();
+      // Dummy implementation for demonstration purposes
+      foreach (var voxel in voxelData) {
+        meshData.Add(new float[] { voxel[0], voxel[1], voxel[2] });
+      }
+      return meshData;
+    }
   }
 }

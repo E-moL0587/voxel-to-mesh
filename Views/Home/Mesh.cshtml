@@ -1,6 +1,58 @@
-@{ ViewData["Title"] = "Mesh"; }
+@{
+  ViewData["Title"] = "Mesh";
+}
 
 <section>
   <h3>@ViewData["Title"]</h3>
   <a asp-action="Index">Index</a>
+  <canvas id="myCanvas"></canvas>
+
+  <h4>Mesh Data</h4>
+  <pre>@ViewData["MeshData"]</pre>
 </section>
+
+<script src="https://unpkg.com/three@0.142.0/build/three.min.js"></script>
+<script src="https://unpkg.com/three@0.142.0/examples/js/controls/OrbitControls.js"></script>
+
+<script>
+  const w = 400, h = 300;
+  const renderer = new THREE.WebGLRenderer({ canvas: document.querySelector('#myCanvas') });
+  renderer.setSize(w, h);
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(45, w / h, 1, 10000);
+  camera.position.set(0, 0, 30);
+
+  const controls = new THREE.OrbitControls(camera, renderer.domElement);
+  scene.add(new THREE.AmbientLight(0xffffff, 0.5));
+  const light = new THREE.DirectionalLight(0xffffff, 1);
+  light.position.set(5, 10, 7.5).normalize();
+  scene.add(light);
+
+  const data = @Html.Raw(ViewData["MeshData"]);
+
+  const boundingBox = new THREE.Box3();
+  data.forEach(([x, y, z]) => {
+    boundingBox.expandByPoint(new THREE.Vector3(x, y, z));
+  });
+
+  const center = new THREE.Vector3();
+  boundingBox.getCenter(center);
+
+  data.forEach(([x, y, z]) => {
+    const mesh = new THREE.Mesh(
+      new THREE.BoxGeometry(1, 1, 1), 
+      new THREE.MeshPhongMaterial({ color: 0xff00ff })
+    );
+    mesh.position.set(-(x - center.x), -(y - center.y), -(z - center.z));
+    scene.add(mesh);
+  });
+
+  function animate() {
+    requestAnimationFrame(animate);
+    controls.update();
+    renderer.render(scene, camera);
+  }
+
+  animate();
+</script>
