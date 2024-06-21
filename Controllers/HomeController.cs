@@ -64,6 +64,7 @@ namespace voxel_to_mesh.Controllers {
     }
 
     public IActionResult Voxel() { return View(); }
+
     public IActionResult Mesh() { return View(); }
   }
 }
