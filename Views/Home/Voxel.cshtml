@@ -22,30 +22,27 @@
   camera.position.set(0, 0, 30);
 
   const controls = new THREE.OrbitControls(camera, renderer.domElement);
-  scene.add(new THREE.AmbientLight(0x404040));
+  scene.add(new THREE.AmbientLight(0xffffff));
   const light = new THREE.DirectionalLight(0xffffff, 1);
   light.position.set(5, 10, 7.5).normalize();
   scene.add(light);
 
   const data = @Html.Raw(ViewData["VoxelData"]);
 
-  // Compute the bounding box of the voxel data
   const boundingBox = new THREE.Box3();
   data.forEach(([x, y, z]) => {
     boundingBox.expandByPoint(new THREE.Vector3(x, y, z));
   });
 
-  // Compute the center of the bounding box
   const center = new THREE.Vector3();
   boundingBox.getCenter(center);
 
-  // Add voxels to the scene
   data.forEach(([x, y, z]) => {
     const mesh = new THREE.Mesh(
       new THREE.BoxGeometry(1, 1, 1), 
       new THREE.MeshPhongMaterial({ color: 0xff00ff })
     );
-    mesh.position.set(x - center.x, y - center.y, z - center.z);
+    mesh.position.set(-(x - center.x), -(y - center.y), -(z - center.z));
     scene.add(mesh);
   });
 
