@@ -14,42 +14,45 @@
 
 <script>
   const w = 400, h = 300;
-  const r = new THREE.WebGLRenderer({ canvas: document.querySelector('#myCanvas') });
-  r.setSize(w, h);
+  const renderer = new THREE.WebGLRenderer({ canvas: document.querySelector('#myCanvas') });
+  renderer.setSize(w, h);
 
-  const s = new THREE.Scene();
-  const c = new THREE.PerspectiveCamera(45, w / h, 1, 10000);
-  c.position.set(0, 0, 30);
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(45, w / h, 1, 10000);
+  camera.position.set(0, 0, 30);
 
-  const controls = new THREE.OrbitControls(c, r.domElement);
-  s.add(new THREE.AmbientLight(0x404040));
+  const controls = new THREE.OrbitControls(camera, renderer.domElement);
+  scene.add(new THREE.AmbientLight(0x404040));
   const light = new THREE.DirectionalLight(0xffffff, 1);
   light.position.set(5, 10, 7.5).normalize();
-  s.add(light);
+  scene.add(light);
 
   const data = @Html.Raw(ViewData["VoxelData"]);
-  const centroid = data.reduce((acc, [x, y, z]) => {
-    acc.x += x; acc.y += y; acc.z += z;
-    return acc;
-  }, { x: 0, y: 0, z: 0 });
 
-  centroid.x /= data.length;
-  centroid.y /= data.length;
-  centroid.z /= data.length;
+  // Compute the bounding box of the voxel data
+  const boundingBox = new THREE.Box3();
+  data.forEach(([x, y, z]) => {
+    boundingBox.expandByPoint(new THREE.Vector3(x, y, z));
+  });
 
+  // Compute the center of the bounding box
+  const center = new THREE.Vector3();
+  boundingBox.getCenter(center);
+
+  // Add voxels to the scene
   data.forEach(([x, y, z]) => {
     const mesh = new THREE.Mesh(
       new THREE.BoxGeometry(1, 1, 1), 
       new THREE.MeshPhongMaterial({ color: 0xff00ff })
     );
-    mesh.position.set(-(x - centroid.x), -(y - centroid.y), -(z - centroid.z));
-    s.add(mesh);
+    mesh.position.set(x - center.x, y - center.y, z - center.z);
+    scene.add(mesh);
   });
 
   function animate() {
     requestAnimationFrame(animate);
     controls.update();
-    r.render(s, c);
+    renderer.render(scene, camera);
   }
 
   animate();
