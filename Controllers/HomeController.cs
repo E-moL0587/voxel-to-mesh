@@ -7,9 +7,10 @@ using System.Text;
 namespace voxel_to_mesh.Controllers {
   public class HomeController : Controller {
     private readonly Models.CoordinateModel _coordinateModel;
-
     public HomeController() { _coordinateModel = new Models.CoordinateModel(); }
+
     public IActionResult Index() { return View(_coordinateModel); }
+
     public IActionResult Pixels() {
       var frontImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/front.png");
       var sideImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/side.png");
@@ -21,6 +22,9 @@ namespace voxel_to_mesh.Controllers {
       var (sideBase64Image, sideBinaryData) = ProcessImage(sideImagePath);
       ViewData["SideBinaryImage"] = sideBase64Image;
       ViewData["SideBinaryData"] = sideBinaryData;
+
+      var voxelData = GenerateVoxelData(frontBinaryData, sideBinaryData, 30, 30);
+      ViewData["VoxelData"] = string.Join("\n", voxelData);
 
       return View();
     }
@@ -42,6 +46,26 @@ namespace voxel_to_mesh.Controllers {
 
       return ($"data:image/png;base64,{base64Image}", binaryData.ToString());
     }
+
+    private static List<string> GenerateVoxelData(string frontData, string sideData, int width, int height) {
+      var voxelData = new List<string>();
+
+      for (int y = 0; y < height; y++) {
+        for (int x = 0; x < width; x++) {
+          int z = x;
+
+          int frontIndex = y * width + x;
+          int sideIndex = y * width + z;
+
+          if (frontData[frontIndex] == '1' && sideData[sideIndex] == '1') {
+            voxelData.Add($"{x},{y},{z}");
+          }
+        }
+      }
+
+      return voxelData;
+    }
+
     public IActionResult Voxel() { return View(); }
     public IActionResult Mesh() { return View(); }
   }

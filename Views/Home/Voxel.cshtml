@@ -1,6 +1,48 @@
-﻿@{ ViewData["Title"] = "Voxel"; }
+﻿@{ ViewData["Title"] = "3DCG表示"; }
 
-<div>
+<section>
   <h3>@ViewData["Title"]</h3>
   <a asp-action="Index">Index</a>
-</div>
+  <canvas id="myCanvas"></canvas>
+</section>
+
+<script src="https://unpkg.com/three@0.142.0/build/three.min.js"></script>
+<script src="https://unpkg.com/three@0.142.0/examples/js/controls/OrbitControls.js"></script>
+
+<script>
+  const width = 500, height = 300;
+  const renderer = new THREE.WebGLRenderer({ canvas: document.querySelector('#myCanvas') });
+  renderer.setSize(width, height);
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(45, width / height, 1, 10000);
+  camera.position.set(0, 0, 10);
+
+  const controls = new THREE.OrbitControls(camera, renderer.domElement);
+  const ambientLight = new THREE.AmbientLight(0x404040);
+  scene.add(ambientLight);
+
+  const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+  directionalLight.position.set(5, 10, 7.5).normalize();
+  scene.add(directionalLight);
+
+  const boxPositions = [
+    [0, 0, 0], [1, 0, 1], [0, 1, 0], [0, 1, 1]
+  ];
+
+  boxPositions.forEach(position => {
+    const geometry = new THREE.BoxGeometry(1, 1, 1);
+    const material = new THREE.MeshPhongMaterial({ color: 0xff00ff });
+    const mesh = new THREE.Mesh(geometry, material);
+    mesh.position.set(...position);
+    scene.add(mesh);
+  });
+
+  function animate() {
+    requestAnimationFrame(animate);
+    controls.update();
+    renderer.render(scene, camera);
+  }
+
+  animate();
+</script>
