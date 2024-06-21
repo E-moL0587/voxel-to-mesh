@@ -22,15 +22,20 @@ namespace voxel_to_mesh.Controllers {
       ViewData["SideBinaryImage"] = sideBase64Image;
       ViewData["SideBinaryData"] = sideBinaryData;
 
-      var (topBase64Image, topBinaryData) = ProcessImage(topImagePath);
+      var (topBase64Image, topBinaryData) = ProcessImage(topImagePath, 90);
       ViewData["TopBinaryImage"] = topBase64Image;
       ViewData["TopBinaryData"] = topBinaryData;
 
       return View();
     }
 
-    private static (string base64Image, string binaryData) ProcessImage(string imagePath) {
+    private static (string base64Image, string binaryData) ProcessImage(string imagePath, float rotationDegrees = 0) {
       using var image = Image.Load<Rgba32>(imagePath);
+      
+      if (rotationDegrees != 0) {
+        image.Mutate(x => x.Rotate(rotationDegrees));
+      }
+
       image.Mutate(x => x.Resize(20, 20).Grayscale().BinaryThreshold(0.5f));
 
       using var ms = new MemoryStream();
@@ -74,7 +79,7 @@ namespace voxel_to_mesh.Controllers {
 
       var (_, frontBinaryData) = ProcessImage(frontImagePath);
       var (_, sideBinaryData) = ProcessImage(sideImagePath);
-      var (_, topBinaryData) = ProcessImage(topImagePath);
+      var (_, topBinaryData) = ProcessImage(topImagePath, 90); // 90度回転
 
       var voxelData = GenerateVoxelData(frontBinaryData, sideBinaryData, topBinaryData, 20, 20);
       ViewData["VoxelData"] = JsonSerializer.Serialize(voxelData);
