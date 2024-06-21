@@ -26,7 +26,7 @@ namespace voxel_to_mesh.Controllers {
 
     private static (string base64Image, string binaryData) ProcessImage(string imagePath) {
       using var image = Image.Load<Rgba32>(imagePath);
-      image.Mutate(x => x.Resize(30, 30).Grayscale().BinaryThreshold(0.5f));
+      image.Mutate(x => x.Resize(20, 20).Grayscale().BinaryThreshold(0.5f));
 
       using var ms = new MemoryStream();
       image.SaveAsPng(ms);
@@ -52,7 +52,7 @@ namespace voxel_to_mesh.Controllers {
             int sideIndex = y * width + z;
 
             if (frontData[frontIndex] == '0' && sideData[sideIndex] == '0') {
-              voxelData.Add(new int[] { x, y, z });
+              voxelData.Add(new[] { x, y, z });
             }
           }
         }
@@ -68,7 +68,7 @@ namespace voxel_to_mesh.Controllers {
       var (_, frontBinaryData) = ProcessImage(frontImagePath);
       var (_, sideBinaryData) = ProcessImage(sideImagePath);
 
-      var voxelData = GenerateVoxelData(frontBinaryData, sideBinaryData, 30, 30);
+      var voxelData = GenerateVoxelData(frontBinaryData, sideBinaryData, 20, 20);
       ViewData["VoxelData"] = JsonSerializer.Serialize(voxelData);
 
       return View();

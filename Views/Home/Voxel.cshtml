@@ -13,36 +13,43 @@
 <script src="https://unpkg.com/three@0.142.0/examples/js/controls/OrbitControls.js"></script>
 
 <script>
-  const width = 500, height = 300;
-  const renderer = new THREE.WebGLRenderer({ canvas: document.querySelector('#myCanvas') });
-  renderer.setSize(width, height);
+  const w = 400, h = 300;
+  const r = new THREE.WebGLRenderer({ canvas: document.querySelector('#myCanvas') });
+  r.setSize(w, h);
 
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(45, width / height, 1, 10000);
-  camera.position.set(0, 0, 100);
+  const s = new THREE.Scene();
+  const c = new THREE.PerspectiveCamera(45, w / h, 1, 10000);
+  c.position.set(0, 0, 30);
 
-  const controls = new THREE.OrbitControls(camera, renderer.domElement);
-  const ambientLight = new THREE.AmbientLight(0x404040);
-  scene.add(ambientLight);
+  const controls = new THREE.OrbitControls(c, r.domElement);
+  s.add(new THREE.AmbientLight(0x404040));
+  const light = new THREE.DirectionalLight(0xffffff, 1);
+  light.position.set(5, 10, 7.5).normalize();
+  s.add(light);
 
-  const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
-  directionalLight.position.set(5, 10, 7.5).normalize();
-  scene.add(directionalLight);
+  const data = @Html.Raw(ViewData["VoxelData"]);
+  const centroid = data.reduce((acc, [x, y, z]) => {
+    acc.x += x; acc.y += y; acc.z += z;
+    return acc;
+  }, { x: 0, y: 0, z: 0 });
 
-  const voxelData = @Html.Raw(ViewData["VoxelData"]);
+  centroid.x /= data.length;
+  centroid.y /= data.length;
+  centroid.z /= data.length;
 
-  voxelData.forEach(position => {
-    const geometry = new THREE.BoxGeometry(1, 1, 1);
-    const material = new THREE.MeshPhongMaterial({ color: 0xff00ff });
-    const mesh = new THREE.Mesh(geometry, material);
-    mesh.position.set(...position);
-    scene.add(mesh);
+  data.forEach(([x, y, z]) => {
+    const mesh = new THREE.Mesh(
+      new THREE.BoxGeometry(1, 1, 1), 
+      new THREE.MeshPhongMaterial({ color: 0xff00ff })
+    );
+    mesh.position.set(-(x - centroid.x), -(y - centroid.y), -(z - centroid.z));
+    s.add(mesh);
   });
 
   function animate() {
     requestAnimationFrame(animate);
     controls.update();
-    renderer.render(scene, camera);
+    r.render(s, c);
   }
 
   animate();
