@@ -1,53 +1,49 @@
-﻿@{
-    ViewData["Title"] = "Voxel";
-    var voxelDataJson = ViewData["VoxelData"] != null ? ViewData["VoxelData"] : "[]";
-}
+﻿@{ ViewData["Title"] = "Voxel"; }
 
 <section>
-    <h3>@ViewData["Title"]</h3>
-    <a asp-action="Index">Index</a>
-    <canvas id="myCanvas"></canvas>
+  <h3>@ViewData["Title"]</h3>
+  <a asp-action="Index">Index</a>
+  <canvas id="myCanvas"></canvas>
 
-    <h4>Voxel Data</h4>
-    <pre>@ViewData["VoxelData"]</pre>
+  <h4>Voxel Data</h4>
+  <pre>@ViewData["VoxelData"]</pre>
 </section>
 
 <script src="https://unpkg.com/three@0.142.0/build/three.min.js"></script>
 <script src="https://unpkg.com/three@0.142.0/examples/js/controls/OrbitControls.js"></script>
 
 <script>
-    const width = 500, height = 300;
-    const renderer = new THREE.WebGLRenderer({ canvas: document.querySelector('#myCanvas') });
-    renderer.setSize(width, height);
+  const width = 500, height = 300;
+  const renderer = new THREE.WebGLRenderer({ canvas: document.querySelector('#myCanvas') });
+  renderer.setSize(width, height);
 
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(45, width / height, 1, 10000);
-    camera.position.set(0, 0, 10);
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(45, width / height, 1, 10000);
+  camera.position.set(0, 0, 10);
 
-    const controls = new THREE.OrbitControls(camera, renderer.domElement);
-    const ambientLight = new THREE.AmbientLight(0x404040);
-    scene.add(ambientLight);
+  const controls = new THREE.OrbitControls(camera, renderer.domElement);
+  const ambientLight = new THREE.AmbientLight(0x404040);
+  scene.add(ambientLight);
 
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
-    directionalLight.position.set(5, 10, 7.5).normalize();
-    scene.add(directionalLight);
+  const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+  directionalLight.position.set(5, 10, 7.5).normalize();
+  scene.add(directionalLight);
 
-    // Voxel Data from ViewData
-    const voxelData = @Html.Raw(voxelDataJson);
+  const voxelData = @Html.Raw(ViewData["VoxelData"]);
 
-    voxelData.forEach(position => {
-        const geometry = new THREE.BoxGeometry(1, 1, 1);
-        const material = new THREE.MeshPhongMaterial({ color: 0xff00ff });
-        const mesh = new THREE.Mesh(geometry, material);
-        mesh.position.set(...position);
-        scene.add(mesh);
-    });
+  voxelData.forEach(position => {
+    const geometry = new THREE.BoxGeometry(1, 1, 1);
+    const material = new THREE.MeshPhongMaterial({ color: 0xff00ff });
+    const mesh = new THREE.Mesh(geometry, material);
+    mesh.position.set(...position);
+    scene.add(mesh);
+  });
 
-    function animate() {
-        requestAnimationFrame(animate);
-        controls.update();
-        renderer.render(scene, camera);
-    }
+  function animate() {
+    requestAnimationFrame(animate);
+    controls.update();
+    renderer.render(scene, camera);
+  }
 
-    animate();
+  animate();
 </script>
