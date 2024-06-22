@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
-
 namespace voxel_to_mesh.Controllers {
   public class LaplacianSmoothing {
     private int iterations;
@@ -39,7 +36,7 @@ namespace voxel_to_mesh.Controllers {
       return newMeshData;
     }
 
-    private List<float[]> GetNeighbors(List<float[]> meshData, float[] vertex, float threshold = 1.5f) {
+    private static List<float[]> GetNeighbors(List<float[]> meshData, float[] vertex, float threshold = 1.5f) {
       var neighbors = new List<float[]>();
 
       foreach (var v in meshData) {
@@ -51,7 +48,7 @@ namespace voxel_to_mesh.Controllers {
       return neighbors;
     }
 
-    private float Distance(float[] a, float[] b) {
+    private static float Distance(float[] a, float[] b) {
       return (float)Math.Sqrt((a[0] - b[0]) * (a[0] - b[0]) + (a[1] - b[1]) * (a[1] - b[1]) + (a[2] - b[2]) * (a[2] - b[2]));
     }
   }

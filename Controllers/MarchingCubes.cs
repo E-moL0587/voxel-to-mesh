@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-
 namespace voxel_to_mesh.Controllers {
   public class MarchingCubes {
     public List<float[]> GenerateMesh(List<int[]> voxelData, int width, int height, int depth) {
@@ -29,7 +26,7 @@ namespace voxel_to_mesh.Controllers {
       return meshData;
     }
 
-    private void ProcessCube(List<float[]> meshData, float[] cube, int x, int y, int z) {
+    private static void ProcessCube(List<float[]> meshData, float[] cube, int x, int y, int z) {
       int cubeIndex = 0;
       if (cube[0] > 0.5) cubeIndex |= 1;
       if (cube[1] > 0.5) cubeIndex |= 2;
@@ -65,7 +62,7 @@ namespace voxel_to_mesh.Controllers {
       }
     }
 
-    private float[] VertexInterp(float valP1, float valP2, int x, int y, int z, int p1, int p2) {
+    private static float[] VertexInterp(float valP1, float valP2, int x, int y, int z, int p1, int p2) {
       if (Math.Abs(0.5f - valP1) < 0.00001)
         return new float[] { x + VertexOffset[p1][0], y + VertexOffset[p1][1], z + VertexOffset[p1][2] };
       if (Math.Abs(0.5f - valP2) < 0.00001)
