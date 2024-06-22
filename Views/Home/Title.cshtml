@@ -1,15 +1,13 @@
 @{ ViewData["Title"] = "Images to Voxel"; ViewData["ShowMenu"] = false; }
 
 <style>
-  .title-container { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 150px; }
+  .title { position: fixed; top: 20%; text-align: center; width: 100%; }
+  .image { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 150px; }
+  .button { position: fixed; bottom: 20%; text-align: center; width: 100%; }
 </style>
 
 <section>
-  <div>
-    <h3 style="position: fixed; top: 20%; text-align: center; width: 100%;">@ViewData["Title"]</h3>
-  </div>
-  <img class="title-container" src="~/images/title.png" alt="Title Image" />
-  <a asp-action="Voxel">
-    <h3 style="position: fixed; bottom: 20%; text-align: center; width: 100%;">Tap to start</h3>
-  </a>
+  <h3 class="title">@ViewData["Title"]</h3>
+  <img class="image" src="~/images/title.png" alt="title" />
+  <a class="button" asp-action="Voxel">Tap to start</a>
 </section>

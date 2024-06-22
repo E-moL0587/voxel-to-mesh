@@ -18,6 +18,10 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\竹内 海斗\workspace\dotnet-space\voxel-to-mesh
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/竹内 海斗/workspace/dotnet-space/voxel-to-mesh/Views/Home/Describe.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxEZXNjcmliZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/竹内 海斗/workspace/dotnet-space/voxel-to-mesh/Views/Home/Mesh.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxNZXNoLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
