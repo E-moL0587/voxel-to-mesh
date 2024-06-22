@@ -1,51 +1,58 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace voxel_to_mesh {
+namespace voxel_to_mesh.Controllers {
   public class LaplacianSmoothing {
-    public List<float[]> Smooth(List<float[]> vertices, int iterations = 10, float lambda = 0.5f) {
-      var smoothedVertices = vertices.Select(v => new float[] { v[0], v[1], v[2] }).ToList();
+    private int iterations;
+    private float lambda;
 
-      for (int iter = 0; iter < iterations; iter++) {
-        var newVertices = new List<float[]>(vertices.Count);
-
-        for (int i = 0; i < vertices.Count; i++) {
-          var vertex = vertices[i];
-          var adjacentVertices = GetAdjacentVertices(i, vertices);
-
-          if (adjacentVertices.Count == 0) {
-            newVertices.Add(new float[] { vertex[0], vertex[1], vertex[2] });
-            continue;
-          }
-
-          float[] newVertex = { 0, 0, 0 };
-          foreach (var adjVertex in adjacentVertices) {
-            newVertex[0] += adjVertex[0];
-            newVertex[1] += adjVertex[1];
-            newVertex[2] += adjVertex[2];
-          }
-
-          newVertex[0] /= adjacentVertices.Count;
-          newVertex[1] /= adjacentVertices.Count;
-          newVertex[2] /= adjacentVertices.Count;
-
-          newVertex[0] = vertex[0] + lambda * (newVertex[0] - vertex[0]);
-          newVertex[1] = vertex[1] + lambda * (newVertex[1] - vertex[1]);
-          newVertex[2] = vertex[2] + lambda * (newVertex[2] - vertex[2]);
-
-          newVertices.Add(newVertex);
-        }
-
-        smoothedVertices = newVertices;
-      }
-
-      return smoothedVertices;
+    public LaplacianSmoothing(int iterations = 2, float lambda = 0.5f) {
+      this.iterations = iterations;
+      this.lambda = lambda;
     }
 
-    private List<float[]> GetAdjacentVertices(int index, List<float[]> vertices) {
-      // Implement adjacency finding logic based on your mesh connectivity data
-      // This is a placeholder method
-      return new List<float[]>();
+    public List<float[]> Smooth(List<float[]> meshData) {
+      var smoothedData = new List<float[]>(meshData.Select(v => (float[])v.Clone()).ToList());
+
+      for (int i = 0; i < iterations; i++) {
+        smoothedData = ApplySmoothing(smoothedData);
+      }
+
+      return smoothedData;
+    }
+
+    private List<float[]> ApplySmoothing(List<float[]> meshData) {
+      var newMeshData = new List<float[]>(meshData.Count);
+
+      for (int i = 0; i < meshData.Count; i++) {
+        var vertex = meshData[i];
+        var neighbors = GetNeighbors(meshData, vertex);
+        var newVertex = new float[3];
+
+        for (int j = 0; j < 3; j++) {
+          newVertex[j] = vertex[j] + lambda * (neighbors.Average(n => n[j]) - vertex[j]);
+        }
+
+        newMeshData.Add(newVertex);
+      }
+
+      return newMeshData;
+    }
+
+    private List<float[]> GetNeighbors(List<float[]> meshData, float[] vertex, float threshold = 1.5f) {
+      var neighbors = new List<float[]>();
+
+      foreach (var v in meshData) {
+        if (!v.SequenceEqual(vertex) && Distance(v, vertex) < threshold) {
+          neighbors.Add(v);
+        }
+      }
+
+      return neighbors;
+    }
+
+    private float Distance(float[] a, float[] b) {
+      return (float)Math.Sqrt((a[0] - b[0]) * (a[0] - b[0]) + (a[1] - b[1]) * (a[1] - b[1]) + (a[2] - b[2]) * (a[2] - b[2]));
     }
   }
 }

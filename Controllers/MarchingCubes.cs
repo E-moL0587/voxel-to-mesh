@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace voxel_to_mesh {
+namespace voxel_to_mesh.Controllers {
   public class MarchingCubes {
     public List<float[]> GenerateMesh(List<int[]> voxelData, int width, int height, int depth) {
       var meshData = new List<float[]>();
