@@ -58,7 +58,7 @@ namespace voxel_to_mesh.Controllers {
       return ($"data:image/png;base64,{base64Image}", binaryData.ToString());
     }
 
-    private static List<int[]> GenerateVoxelData(string frontData, string sideData, string topData, int width, int height) {
+    private static List<int[]> GenerateVoxelData(string frontData, string sideData, string topData, int width) {
       var voxelData = new List<int[]>();
 
       for (int y = 0; y < width; y++) {
@@ -87,7 +87,7 @@ namespace voxel_to_mesh.Controllers {
       var (_, sideBinaryData) = ProcessImage(sideImagePath);
       var (_, topBinaryData) = ProcessImage(topImagePath, 90);
 
-      var voxelData = GenerateVoxelData(frontBinaryData, sideBinaryData, topBinaryData, 20, 20);
+      var voxelData = GenerateVoxelData(frontBinaryData, sideBinaryData, topBinaryData, 20);
       ViewData["VoxelData"] = JsonSerializer.Serialize(voxelData);
 
       return View();
@@ -102,7 +102,7 @@ namespace voxel_to_mesh.Controllers {
       var (_, sideBinaryData) = ProcessImage(sideImagePath);
       var (_, topBinaryData) = ProcessImage(topImagePath, 90);
 
-      var voxelData = GenerateVoxelData(frontBinaryData, sideBinaryData, topBinaryData, 20, 20);
+      var voxelData = GenerateVoxelData(frontBinaryData, sideBinaryData, topBinaryData, 20);
       var meshData = _marchingCubes.GenerateMesh(voxelData, 20, 20, 20);
 
       ViewData["MeshData"] = JsonSerializer.Serialize(meshData);
@@ -119,7 +119,7 @@ namespace voxel_to_mesh.Controllers {
       var (_, sideBinaryData) = ProcessImage(sideImagePath);
       var (_, topBinaryData) = ProcessImage(topImagePath, 90);
 
-      var voxelData = GenerateVoxelData(frontBinaryData, sideBinaryData, topBinaryData, 20, 20);
+      var voxelData = GenerateVoxelData(frontBinaryData, sideBinaryData, topBinaryData, 20);
       var meshData = _marchingCubes.GenerateMesh(voxelData, 20, 20, 20);
       var smoothedMeshData = _laplacianSmoothing.Smooth(meshData);
 
