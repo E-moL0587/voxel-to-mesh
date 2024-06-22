@@ -9,14 +9,25 @@
   </head>
 
   <body>
-    <section role="main">@RenderBody()</section>
+    <main role="main">@RenderBody()</main>
 
-    <section>
-      <a asp-action="Pixels">Pixels</a>
-      <a asp-action="Voxel">Voxel</a>
-      <a asp-action="Mesh">Mesh</a>
-      <a asp-action="Smooth">Smooth</a>
-    </section>
+    @if (ViewData["ShowMenu"] == null || (ViewData["ShowMenu"] is bool showMenu && showMenu)) {
+      <header>
+        <a>@ViewData["Title"]</a>
+      </header>
+
+      <section>
+        <a asp-action="Voxel">Voxel</a>
+        <a asp-action="Mesh">Mesh</a>
+        <a asp-action="Smooth">Smooth</a>
+      </section>
+
+      <footer>
+        <a asp-action="Pixels">Pixels</a>
+        <a asp-action="Title">Title</a>
+        <a asp-action="Voxel">Voxel</a>
+      </footer>
+    }
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

@@ -22,6 +22,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Voxel}/{id?}");
+    pattern: "{controller=Home}/{action=Title}/{id?}");
 
 app.Run();
