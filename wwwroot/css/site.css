@@ -1,0 +1,4 @@
+#myCanvas { width: 50vw; height: 100vh; }
+@media (max-width: 768px) {
+  #myCanvas { width: 100vw; height: 50vh; }
+}

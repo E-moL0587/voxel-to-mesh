@@ -1,20 +1,18 @@
 @{ ViewData["Title"] = "Smooth"; }
 
 <section>
-  <h3>@ViewData["Title"]</h3>
   <canvas id="myCanvas"></canvas>
-
-  <h4>Smooth Data</h4>
-  <pre>@ViewData["SmoothData"]</pre>
 </section>
 
 <script src="https://unpkg.com/three@0.142.0/build/three.min.js"></script>
 <script src="https://unpkg.com/three@0.142.0/examples/js/controls/OrbitControls.js"></script>
 
 <script>
-  const w = 400, h = 300;
-  const renderer = new THREE.WebGLRenderer({ canvas: document.querySelector('#myCanvas') });
-  renderer.setSize(w, h);
+  const canvas = document.querySelector('#myCanvas');
+  const renderer = new THREE.WebGLRenderer({ canvas });
+  const w = canvas.clientWidth;
+  const h = canvas.clientHeight;
+  renderer.setSize(w, h, false);
 
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(45, w / h, 1, 10000);
