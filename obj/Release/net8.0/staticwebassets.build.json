@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "++AlsZwrnrKFStA8QY/sOR4euFX9mAMdR67fELIpEf0=",
+  "Hash": "xMOrIuYTIm2hkxUwhmwKLU5Dtq8WtIQfovjatcHyjLk=",
   "Source": "voxel-to-mesh",
   "BasePath": "_content/voxel-to-mesh",
   "Mode": "Default",
@@ -129,6 +129,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\side.png"
+    },
+    {
+      "Identity": "C:\\Users\\竹内 海斗\\workspace\\dotnet-space\\voxel-to-mesh\\wwwroot\\images\\title.png",
+      "SourceId": "voxel-to-mesh",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\竹内 海斗\\workspace\\dotnet-space\\voxel-to-mesh\\wwwroot\\",
+      "BasePath": "_content/voxel-to-mesh",
+      "RelativePath": "images/title.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\title.png"
     },
     {
       "Identity": "C:\\Users\\竹内 海斗\\workspace\\dotnet-space\\voxel-to-mesh\\wwwroot\\images\\top.png",
