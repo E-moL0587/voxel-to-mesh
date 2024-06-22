@@ -123,7 +123,7 @@ namespace voxel_to_mesh.Controllers {
       var meshData = _marchingCubes.GenerateMesh(voxelData, 20, 20, 20);
       var smoothedMeshData = _laplacianSmoothing.Smooth(meshData);
 
-      ViewData["SmoothData"] = JsonSerializer.Serialize(meshData);
+      ViewData["SmoothData"] = JsonSerializer.Serialize(smoothedMeshData);
 
       return View();
     }
