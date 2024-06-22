@@ -21,6 +21,10 @@
       "PackagePath": "staticwebassets\\images\\side.png"
     },
     {
+      "Id": "C:\\Users\\竹内 海斗\\workspace\\dotnet-space\\voxel-to-mesh\\wwwroot\\images\\title.png",
+      "PackagePath": "staticwebassets\\images\\title.png"
+    },
+    {
       "Id": "C:\\Users\\竹内 海斗\\workspace\\dotnet-space\\voxel-to-mesh\\wwwroot\\images\\top.png",
       "PackagePath": "staticwebassets\\images\\top.png"
     },
