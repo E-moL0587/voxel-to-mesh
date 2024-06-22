@@ -10,6 +10,15 @@
 
   <body>
     <main role="main">@RenderBody()</main>
+
+    <section>
+      <h3>@ViewData["Title"]</h3>
+      <a asp-action="Pixels">Pixels</a>
+      <a asp-action="Voxel">Voxel</a>
+      <a asp-action="Mesh">Mesh</a>
+      <a asp-action="Smooth">Smooth</a>
+    </section>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

@@ -15,8 +15,6 @@ namespace voxel_to_mesh.Controllers {
       _laplacianSmoothing = new LaplacianSmoothing();
     }
 
-    public IActionResult Index() => View();
-
     public IActionResult Pixels() {
       var frontImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/front.png");
       var sideImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/side.png");
