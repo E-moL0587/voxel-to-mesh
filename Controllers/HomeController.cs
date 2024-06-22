@@ -8,7 +8,12 @@ using System.Text.Json;
 namespace voxel_to_mesh.Controllers {
   public class HomeController : Controller {
     private readonly MarchingCubes _marchingCubes;
-    public HomeController() { _marchingCubes = new MarchingCubes(); }
+    private readonly LaplacianSmoothing _laplacianSmoothing;
+
+    public HomeController() {
+      _marchingCubes = new MarchingCubes();
+      _laplacianSmoothing = new LaplacianSmoothing();
+    }
 
     public IActionResult Index() => View();
 
@@ -101,6 +106,24 @@ namespace voxel_to_mesh.Controllers {
       var meshData = _marchingCubes.GenerateMesh(voxelData, 20, 20, 20);
 
       ViewData["MeshData"] = JsonSerializer.Serialize(meshData);
+
+      return View();
+    }
+
+    public IActionResult Smooth() {
+      var frontImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/front.png");
+      var sideImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/side.png");
+      var topImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/top.png");
+
+      var (_, frontBinaryData) = ProcessImage(frontImagePath);
+      var (_, sideBinaryData) = ProcessImage(sideImagePath);
+      var (_, topBinaryData) = ProcessImage(topImagePath, 90);
+
+      var voxelData = GenerateVoxelData(frontBinaryData, sideBinaryData, topBinaryData, 20, 20);
+      var meshData = _marchingCubes.GenerateMesh(voxelData, 20, 20, 20);
+      var smoothedMeshData = _laplacianSmoothing.Smooth(meshData);
+
+      ViewData["SmoothData"] = JsonSerializer.Serialize(meshData);
 
       return View();
     }

@@ -1,0 +1,66 @@
+@{ ViewData["Title"] = "Smooth"; }
+
+<section>
+  <h3>@ViewData["Title"]</h3>
+  <a asp-action="Index">Index</a>
+  <canvas id="myCanvas"></canvas>
+
+  <h4>Smooth Data</h4>
+  <pre>@ViewData["SmoothData"]</pre>
+</section>
+
+<script src="https://unpkg.com/three@0.142.0/build/three.min.js"></script>
+<script src="https://unpkg.com/three@0.142.0/examples/js/controls/OrbitControls.js"></script>
+
+<script>
+  const w = 400, h = 300;
+  const renderer = new THREE.WebGLRenderer({ canvas: document.querySelector('#myCanvas') });
+  renderer.setSize(w, h);
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(45, w / h, 1, 10000);
+  camera.position.set(0, 0, 30);
+
+  const controls = new THREE.OrbitControls(camera, renderer.domElement);
+  scene.add(new THREE.AmbientLight(0xffffff, 0.5));
+  const light = new THREE.DirectionalLight(0xffffff, 1);
+  light.position.set(5, 10, 7.5).normalize();
+  scene.add(light);
+
+  const smoothData = @Html.Raw(ViewData["SmoothData"]);
+
+  const geometry = new THREE.BufferGeometry();
+
+  const vertices = [];
+  const data = [];
+  for (let i = 0; i < smoothData.length; i++) {
+    data.push(new THREE.Vector3(smoothData[i][0], smoothData[i][1], smoothData[i][2]));
+  }
+
+  const boundingBox = new THREE.Box3();
+  data.forEach(point => {
+    boundingBox.expandByPoint(point);
+  });
+
+  const center = new THREE.Vector3();
+  boundingBox.getCenter(center);
+
+  data.forEach(point => {
+    vertices.push(-(point.x - center.x), -(point.y - center.y), -(point.z - center.z));
+  });
+
+  geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+  geometry.computeVertexNormals();
+
+  const material = new THREE.MeshPhongMaterial({ color: 0xff00ff, side: THREE.DoubleSide });
+  const smooth = new THREE.Mesh(geometry, material);
+  scene.add(smooth);
+
+  function animate() {
+    requestAnimationFrame(animate);
+    controls.update();
+    renderer.render(scene, camera);
+  }
+
+  animate();
+</script>
