@@ -17,7 +17,7 @@ namespace voxel_to_mesh.Controllers {
 
     public IActionResult Title() => View();
 
-    public IActionResult Pixels() {
+    public IActionResult Menu() {
       var frontImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/front.png");
       var sideImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/side.png");
       var topImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/top.png");
