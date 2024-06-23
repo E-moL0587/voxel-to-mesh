@@ -25,10 +25,6 @@
       "PackagePath": "staticwebassets\\images\\top.png"
     },
     {
-      "Id": "C:\\Users\\竹内 海斗\\workspace\\dotnet-space\\voxel-to-mesh\\wwwroot\\js\\app.js",
-      "PackagePath": "staticwebassets\\js\\app.js"
-    },
-    {
       "Id": "C:\\Users\\竹内 海斗\\workspace\\dotnet-space\\voxel-to-mesh\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },

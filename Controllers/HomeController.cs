@@ -16,7 +16,6 @@ namespace voxel_to_mesh.Controllers {
     }
 
     public IActionResult Title() => View();
-    public IActionResult Describe() => View();
 
     public IActionResult Pixels() {
       var frontImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/front.png");
