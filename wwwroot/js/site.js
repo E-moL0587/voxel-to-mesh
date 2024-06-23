@@ -1,10 +1,10 @@
-﻿const toggleButton = document.getElementById('toggleButton');
-const toggleText = document.getElementById('toggleText');
+﻿document.addEventListener('DOMContentLoaded', function () {
+  const titleScreen = document.getElementById('titleScreen');
+  const menuScreen = document.getElementById('menuScreen');
+  const titleButton = document.getElementById('titleButton');
 
-toggleButton.addEventListener('click', () => {
-  if (toggleText.style.display === 'none') {
-    toggleText.style.display = 'block';
-  } else {
-    toggleText.style.display = 'none';
-  }
+  titleButton.addEventListener('click', function () {
+      titleScreen.classList.add('hidden');
+      menuScreen.classList.remove('hidden');
+  });
 });

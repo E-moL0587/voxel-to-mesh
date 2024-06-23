@@ -21,7 +21,9 @@ namespace voxel_to_mesh.Controllers {
       _topImagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images/top.png");
     }
 
-    public IActionResult Title() => View();
+    public IActionResult Index() {
+      return View();
+    }
 
     public IActionResult Pixels() {
       var frontBinaryData = _imageProcessor.ProcessImage(_frontImagePath);

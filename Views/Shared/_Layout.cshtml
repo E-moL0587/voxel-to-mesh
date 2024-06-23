@@ -3,31 +3,15 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"]</title>
+    <title>Images to Voxel</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
   </head>
 
   <body>
-    <header>
-      <a>@ViewData["Title"]</a>
-    </header>
-
     <main role="main">
       @RenderBody()
     </main>
-
-    <section>
-      <a asp-action="Pixels">ピクセル</a>
-      <a asp-action="Voxel">ボクセル</a>
-      <a asp-action="Mesh">メッシュ</a>
-      <a asp-action="Smooth">スムージング</a>
-    </section>
-
-    <footer>
-      <a asp-action="Title">もどる</a>
-      <a id="toggleButton">説明</a>
-    </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

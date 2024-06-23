@@ -1,0 +1,22 @@
+<style>
+  .hidden { display: none; }
+  .title { position: fixed; top: 20%; text-align: center; width: 100%; }
+  .image { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 150px; }
+  .button { position: fixed; bottom: 20%; text-align: center; width: 100%; }
+</style>
+
+<section id="titleScreen">
+  <h3 class="title">Images to Voxel</h3>
+  <img class="image" src="~/images/title.png" alt="title" />
+  <a class="button" id="titleButton">Tap to start</a>
+</section>
+
+<section id="menuScreen" class="hidden">
+  <header></header>
+  <footer>
+    <a asp-action="Pixels">ピクセル</a>
+    <a asp-action="Voxel">ボクセル</a>
+    <a asp-action="Mesh">メッシュ</a>
+    <a asp-action="Smooth">スムージング</a>
+  </footer>
+</section>
