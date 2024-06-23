@@ -1,10 +1,6 @@
 {
   "Files": [
     {
-      "Id": "C:\\Users\\竹内 海斗\\workspace\\dotnet-space\\voxel-to-mesh\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\voxel-to-mesh.bundle.scp.css",
-      "PackagePath": "staticwebassets\\voxel-to-mesh.bundle.scp.css"
-    },
-    {
       "Id": "C:\\Users\\竹内 海斗\\workspace\\dotnet-space\\voxel-to-mesh\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },

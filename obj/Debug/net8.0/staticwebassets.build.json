@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "2e40VS/lvxNtPFXeh5ZxbD6zENQgwQAArYlZDlvnu5U=",
+  "Hash": "hCdHio5nCyGvb8uLRtTVPWGGU5lgLmThMvFj8BMLOFw=",
   "Source": "voxel-to-mesh",
   "BasePath": "_content/voxel-to-mesh",
   "Mode": "Default",
@@ -16,44 +16,6 @@
     }
   ],
   "Assets": [
-    {
-      "Identity": "C:\\Users\\竹内 海斗\\workspace\\dotnet-space\\voxel-to-mesh\\obj\\Debug\\net8.0\\scopedcss\\bundle\\voxel-to-mesh.styles.css",
-      "SourceId": "voxel-to-mesh",
-      "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\竹内 海斗\\workspace\\dotnet-space\\voxel-to-mesh\\obj\\Debug\\net8.0\\scopedcss\\bundle\\",
-      "BasePath": "_content/voxel-to-mesh",
-      "RelativePath": "voxel-to-mesh.styles.css",
-      "AssetKind": "All",
-      "AssetMode": "CurrentProject",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "ScopedCss",
-      "AssetTraitValue": "ApplicationBundle",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\竹内 海斗\\workspace\\dotnet-space\\voxel-to-mesh\\obj\\Debug\\net8.0\\scopedcss\\bundle\\voxel-to-mesh.styles.css"
-    },
-    {
-      "Identity": "C:\\Users\\竹内 海斗\\workspace\\dotnet-space\\voxel-to-mesh\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\voxel-to-mesh.bundle.scp.css",
-      "SourceId": "voxel-to-mesh",
-      "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\竹内 海斗\\workspace\\dotnet-space\\voxel-to-mesh\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\",
-      "BasePath": "_content/voxel-to-mesh",
-      "RelativePath": "voxel-to-mesh.bundle.scp.css",
-      "AssetKind": "All",
-      "AssetMode": "Reference",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "ScopedCss",
-      "AssetTraitValue": "ProjectBundle",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\竹内 海斗\\workspace\\dotnet-space\\voxel-to-mesh\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\voxel-to-mesh.bundle.scp.css"
-    },
     {
       "Identity": "C:\\Users\\竹内 海斗\\workspace\\dotnet-space\\voxel-to-mesh\\wwwroot\\css\\site.css",
       "SourceId": "voxel-to-mesh",
