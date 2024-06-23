@@ -1,15 +1,40 @@
 @{ ViewData["Title"] = "メニュー"; }
 
 <section>
-  <h4>Front Image</h4>
-  <img src="@ViewData["FrontBinaryImage"]" alt="Binary Image - Front" />
-  <pre>@ViewData["FrontBinaryData"]</pre>
-
-  <h4>Side Image</h4>
-  <img src="@ViewData["SideBinaryImage"]" alt="Binary Image - Side" />
-  <pre>@ViewData["SideBinaryData"]</pre>
-
-  <h4>Top Image</h4>
-  <img src="@ViewData["TopBinaryImage"]" alt="Binary Image - Top" />
-  <pre>@ViewData["TopBinaryData"]</pre>
+  <div id="myCanvas"></div>
+  <canvas id="frontCanvas"></canvas>
+  <canvas id="sideCanvas"></canvas>
+  <canvas id="topCanvas"></canvas>
 </section>
+
+<script>
+  const frontBinaryData = `@ViewData["FrontBinaryData"]`;
+  const sideBinaryData = `@ViewData["SideBinaryData"]`;
+  const topBinaryData = `@ViewData["TopBinaryData"]`;
+
+  function drawCanvas(canvasId, binaryData, flipHorizontal = false) {
+    const canvas = document.getElementById(canvasId);
+    const myCanvas = document.querySelector('#myCanvas');
+    const ctx = canvas.getContext('2d');
+    const size = 20;
+    const scale = myCanvas.clientWidth / size;
+    canvas.width = size * scale;
+    canvas.height = size * scale;
+
+    for (let y = 0; y < size; y++) {
+      for (let x = 0; x < size; x++) {
+        const pixelIndex = y * size + x;
+        const color = binaryData[pixelIndex] === '0' ? '#0f0f0f' : '#f0f0f0';
+        ctx.fillStyle = color;
+
+        const drawX = flipHorizontal ? size - 1 - x : x;
+        ctx.fillRect(drawX * scale, y * scale, scale, scale);
+      }
+    }
+  }
+
+  drawCanvas('frontCanvas', frontBinaryData, true);
+  drawCanvas('sideCanvas', sideBinaryData);
+  drawCanvas('topCanvas', topBinaryData, true);
+  myCanvas.remove();
+</script>

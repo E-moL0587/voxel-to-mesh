@@ -1,6 +1,6 @@
-#myCanvas { width: 100vh; height: 100vh; }
-@media (max-width: 768px) {
-  #myCanvas { width: 100vw; height: 100vw; }
+#myCanvas { width: 100vw; height: 100vw; }
+@media (min-width: 641px) {
+  #myCanvas { width: 100vh; height: 100vh; }
 }
 
 header {

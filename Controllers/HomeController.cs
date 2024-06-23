@@ -24,24 +24,21 @@ namespace voxel_to_mesh.Controllers {
     public IActionResult Title() => View();
 
     public IActionResult Menu() {
-      var frontData = _imageProcessor.ProcessImage(_frontImagePath);
-      var sideData = _imageProcessor.ProcessImage(_sideImagePath);
-      var topData = _imageProcessor.ProcessImage(_topImagePath);
+      var frontBinaryData = _imageProcessor.ProcessImage(_frontImagePath);
+      var sideBinaryData = _imageProcessor.ProcessImage(_sideImagePath);
+      var topBinaryData = _imageProcessor.ProcessImage(_topImagePath);
 
-      ViewData["FrontBinaryImage"] = frontData.Base64Image;
-      ViewData["FrontBinaryData"] = frontData.BinaryData;
-      ViewData["SideBinaryImage"] = sideData.Base64Image;
-      ViewData["SideBinaryData"] = sideData.BinaryData;
-      ViewData["TopBinaryImage"] = topData.Base64Image;
-      ViewData["TopBinaryData"] = topData.BinaryData;
+      ViewData["FrontBinaryData"] = frontBinaryData;
+      ViewData["SideBinaryData"] = sideBinaryData;
+      ViewData["TopBinaryData"] = topBinaryData;
 
       return View();
     }
 
     private (List<int[]> voxelData, string frontBinaryData, string sideBinaryData, string topBinaryData) PrepareData() {
-      var (_, frontBinaryData) = _imageProcessor.ProcessImage(_frontImagePath);
-      var (_, sideBinaryData) = _imageProcessor.ProcessImage(_sideImagePath);
-      var (_, topBinaryData) = _imageProcessor.ProcessImage(_topImagePath, 90);
+      var frontBinaryData = _imageProcessor.ProcessImage(_frontImagePath);
+      var sideBinaryData = _imageProcessor.ProcessImage(_sideImagePath);
+      var topBinaryData = _imageProcessor.ProcessImage(_topImagePath, 90);
 
       var voxelData = _voxelGenerator.GenerateVoxelData(frontBinaryData, sideBinaryData, topBinaryData, 20);
 
