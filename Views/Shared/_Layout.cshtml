@@ -9,26 +9,25 @@
   </head>
 
   <body>
-    <main role="main">@RenderBody()</main>
+    <header>
+      <a>@ViewData["Title"]</a>
+    </header>
 
-    @if (ViewData["ShowMenu"] == null || (ViewData["ShowMenu"] is bool showMenu && showMenu)) {
-      <header>
-        <a>@ViewData["Title"]</a>
-      </header>
+    <main role="main">
+      @RenderBody()
+    </main>
 
-      <section>
-        <a asp-action="Menu">メニュー</a>
-        <a asp-action="Voxel">ボクセル</a>
-        <br />
-        <a asp-action="Mesh">メッシュ</a>
-        <a asp-action="Smooth">スムージング</a>
-      </section>
+    <section>
+      <a asp-action="Pixels">ピクセル</a>
+      <a asp-action="Voxel">ボクセル</a>
+      <a asp-action="Mesh">メッシュ</a>
+      <a asp-action="Smooth">スムージング</a>
+    </section>
 
-      <footer>
-        <a asp-action="Title">もどる</a>
-        <a id="toggleButton">説明</a>
-      </footer>
-    }
+    <footer>
+      <a asp-action="Title">もどる</a>
+      <a id="toggleButton">説明</a>
+    </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

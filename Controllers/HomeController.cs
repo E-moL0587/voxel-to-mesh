@@ -23,7 +23,7 @@ namespace voxel_to_mesh.Controllers {
 
     public IActionResult Title() => View();
 
-    public IActionResult Menu() {
+    public IActionResult Pixels() {
       var frontBinaryData = _imageProcessor.ProcessImage(_frontImagePath);
       var sideBinaryData = _imageProcessor.ProcessImage(_sideImagePath);
       var topBinaryData = _imageProcessor.ProcessImage(_topImagePath);
