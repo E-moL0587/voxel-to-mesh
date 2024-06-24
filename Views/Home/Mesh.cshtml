@@ -1,61 +1,61 @@
 <section>
-  <canvas id="myCanvas"></canvas>
+  <canvas id="meshCanvas"></canvas>
 </section>
 
 <script src="https://unpkg.com/three@0.142.0/build/three.min.js"></script>
 <script src="https://unpkg.com/three@0.142.0/examples/js/controls/OrbitControls.js"></script>
 
 <script>
-  const canvas = document.querySelector('#myCanvas');
-  const renderer = new THREE.WebGLRenderer({ canvas });
-  const w = canvas.clientWidth;
-  const h = canvas.clientHeight;
-  renderer.setSize(w, h, false);
+  const meshCanvas = document.querySelector('#meshCanvas');
+  const meshRenderer = new THREE.WebGLRenderer({ canvas: meshCanvas });
+  const meshWidth = meshCanvas.clientWidth;
+  const meshHeight = meshCanvas.clientHeight;
+  meshRenderer.setSize(meshWidth, meshHeight, false);
 
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(45, w / h, 1, 10000);
-  camera.position.set(0, 0, 40);
+  const meshScene = new THREE.Scene();
+  const meshCamera = new THREE.PerspectiveCamera(45, meshWidth / meshHeight, 1, 10000);
+  meshCamera.position.set(0, 0, 40);
 
-  const controls = new THREE.OrbitControls(camera, renderer.domElement);
-  scene.add(new THREE.AmbientLight(0xffffff, 0.5));
-  const light = new THREE.DirectionalLight(0xffffff, 1);
-  light.position.set(5, 10, 7.5).normalize();
-  scene.add(light);
+  const meshControls = new THREE.OrbitControls(meshCamera, meshRenderer.domElement);
+  meshScene.add(new THREE.AmbientLight(0xffffff, 0.5));
+  const meshLight = new THREE.DirectionalLight(0xffffff, 1);
+  meshLight.position.set(5, 10, 7.5).normalize();
+  meshScene.add(meshLight);
 
   const meshData = @Html.Raw(ViewData["MeshData"]);
 
-  const geometry = new THREE.BufferGeometry();
+  const meshGeometry = new THREE.BufferGeometry();
 
-  const vertices = [];
-  const data = [];
+  const meshVertices = [];
+  const meshPoints = [];
   for (let i = 0; i < meshData.length; i++) {
-    data.push(new THREE.Vector3(meshData[i][0], meshData[i][1], meshData[i][2]));
+    meshPoints.push(new THREE.Vector3(meshData[i][0], meshData[i][1], meshData[i][2]));
   }
 
-  const boundingBox = new THREE.Box3();
-  data.forEach(point => {
-    boundingBox.expandByPoint(point);
+  const meshBoundingBox = new THREE.Box3();
+  meshPoints.forEach(point => {
+    meshBoundingBox.expandByPoint(point);
   });
 
-  const center = new THREE.Vector3();
-  boundingBox.getCenter(center);
+  const meshCenter = new THREE.Vector3();
+  meshBoundingBox.getCenter(meshCenter);
 
-  data.forEach(point => {
-    vertices.push(-(point.x - center.x), -(point.y - center.y), -(point.z - center.z));
+  meshPoints.forEach(point => {
+    meshVertices.push(-(point.x - meshCenter.x), -(point.y - meshCenter.y), -(point.z - meshCenter.z));
   });
 
-  geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
-  geometry.computeVertexNormals();
+  meshGeometry.setAttribute('position', new THREE.Float32BufferAttribute(meshVertices, 3));
+  meshGeometry.computeVertexNormals();
 
-  const material = new THREE.MeshPhongMaterial({ color: 0xff00ff, side: THREE.DoubleSide });
-  const mesh = new THREE.Mesh(geometry, material);
-  scene.add(mesh);
+  const meshMaterial = new THREE.MeshPhongMaterial({ color: 0xff00ff, side: THREE.DoubleSide });
+  const mesh = new THREE.Mesh(meshGeometry, meshMaterial);
+  meshScene.add(mesh);
 
-  function animate() {
-    requestAnimationFrame(animate);
-    controls.update();
-    renderer.render(scene, camera);
+  function animateMesh() {
+    requestAnimationFrame(animateMesh);
+    meshControls.update();
+    meshRenderer.render(meshScene, meshCamera);
   }
 
-  animate();
+  animateMesh();
 </script>
