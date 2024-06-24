@@ -5,11 +5,22 @@
   .button { position: fixed; bottom: 20%; text-align: center; width: 100%; }
 </style>
 
+<script src="https://unpkg.com/three@0.142.0/build/three.min.js"></script>
+<script src="https://unpkg.com/three@0.142.0/examples/js/controls/OrbitControls.js"></script>
+
 <section id="titleScreen">
   <h3 class="title">Images to Voxel</h3>
   <img class="image" src="~/images/title.png" alt="title" />
   <a class="button" id="titleButton">Tap to start</a>
 </section>
+
+<section id="menuScreen">
+  @await Html.PartialAsync("Pixels")
+<section>
+
+<section id="menuScreen" class="hidden">
+  @await Html.PartialAsync("Smooth")
+<section>
 
 <section id="menuScreen" class="hidden">
   <header></header>
